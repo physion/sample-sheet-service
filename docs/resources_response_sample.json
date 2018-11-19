@@ -1,0 +1,7 @@
+{
+  "resources": [{
+    "resource_name": "sample_sheet.xml",
+    "content": "<xml>sample sheet content</xml>",
+    "label": "sample-sheet"
+  }]
+}

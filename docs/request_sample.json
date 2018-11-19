@@ -1,0 +1,224 @@
+{
+  "workflow_activity": {
+    "id": 1654,
+    "status": "completed",
+    "activity_type": "pool-samples",
+    "activity_name": "Pool Samples and Run Sequence",
+    "configuration": {
+      "instruments": [
+        "NextSeq-1",
+        "NextSeq-2"
+      ],
+      "repeatWorkflowType": "sequence"
+    },
+    "custom_attributes": {
+      "flowCellId": "my-flow-cell"
+    },
+    "workflow": {
+      "id": 206,
+      "status": "processing",
+      "workflow_sample_results": [],
+      "samples": [{
+        "id": 739,
+        "sample_uuid": null,
+        "identifier": "ngs-standard-5.1",
+        "requisition_id": 477,
+        "control": false,
+        "date_received": "2017-12-06",
+        "received": true,
+        "custom_attributes": {},
+        "sample_states": [{
+            "id": 15586,
+            "sample_id": 739,
+            "position": "a01",
+            "internal_position": 1,
+            "pool_index": 0,
+            "container_barcode_label": "P00000000129"
+          },
+          {
+            "id": 15605,
+            "sample_id": 739,
+            "position": "A02",
+            "internal_position": 2,
+            "pool_index": 0,
+            "container_barcode_label": "P0000000012R"
+          },
+          {
+            "id": 15611,
+            "sample_id": 739,
+            "position": "A02",
+            "internal_position": 2,
+            "pool_index": 0,
+            "container_barcode_label": "P00000000130"
+          },
+          {
+            "id": 15612,
+            "sample_id": 739,
+            "position": "A02",
+            "internal_position": 2,
+            "pool_index": 0,
+            "container_barcode_label": "P00000000131"
+          },
+          {
+            "id": 15997,
+            "sample_id": 739,
+            "position": "A01",
+            "internal_position": 1,
+            "pool_index": 0,
+            "container_barcode_label": "P0000000013C"
+          },
+          {
+            "id": 15998,
+            "sample_id": 739,
+            "position": "A01",
+            "internal_position": 1,
+            "pool_index": 0,
+            "container_barcode_label": "P0000000013E"
+          }
+        ],
+        "requisition": {
+          "id": 477,
+          "uuid": "27398cfb-5749-495d-8c49-a54079f76715",
+          "identifier": "ngs-standard-5",
+          "sample_collection_date": "2017-12-01",
+          "requested_tests": {
+            "p1012": true
+          },
+          "diagnosis": null,
+          "sample_type": null,
+          "medications": null,
+          "custom_attributes": {},
+          "accession_status": "signed",
+          "processing_status": "processing",
+          "billing_status": "not-submitted"
+        },
+        "patient": {
+          "id": 415,
+          "requisition_id": 477,
+          "patient_uuid": null,
+          "identifier": "ngs-standard-5",
+          "last_name": null,
+          "first_name": null,
+          "date_of_birth": null,
+          "gender": null,
+          "ethnicity": null
+        },
+        "physician": null,
+        "workflow_sample_results": [{
+            "id": 554,
+            "result_type": "sample-quality-check",
+            "status": "accepted",
+            "result": {
+              "bioanalyzer": {
+                "status": "accepted"
+              },
+              "qubit": {
+                "records": [{
+                  "Qubit:Broad Range or High Sensitivity (ng/uL)": "128.32",
+                  "Total Quantity (ng)": "1156.23",
+                  "DV200": "87",
+                  "RIN": "6.2"
+                }],
+                "status": "accepted"
+              }
+            },
+            "routing": null,
+            "workflow_sample_id": 535,
+            "workflow_activity_id": 1583,
+            "computed_status": null
+          },
+          {
+            "id": 558,
+            "result_type": "library-creation",
+            "status": null,
+            "result": {
+              "sampleIndex": {
+                "records": [{
+                  "Name": "ADP289-1",
+                  "Barcode": "ADP289-1",
+                  "Project": "General",
+                  "Adapter Set": "Alpha",
+                  "Well": "A1",
+                  "Index 2 (I5)": "D501",
+                  "I5 Sequence": "TATAGCCT",
+                  "Index 1 (I7)": "D701",
+                  "I7 Sequence": "ATTACTCG"
+                }],
+                "status": "unknown"
+              }
+            },
+            "routing": null,
+            "workflow_sample_id": 538,
+            "workflow_activity_id": 1587,
+            "computed_status": null
+          },
+          {
+            "id": 559,
+            "result_type": "library-quality-check",
+            "status": "accepted",
+            "result": {
+              "libraryQC": {
+                "records": [{
+                  "Volume (uL)": "17",
+                  "Qubit: Broad Range or High Sensitivity": "43.3",
+                  "Total Quantity (ng)": "736.1",
+                  "Average Fragment Size (bp)": "300",
+                  "PCR Cycle #": "15",
+                  "Fragmentation conditions": "None",
+                  "Spike-In Volume": null,
+                  "Spike-In Dilution Factor": null
+                }],
+                "status": "accepted"
+              }
+            },
+            "routing": null,
+            "workflow_sample_id": 538,
+            "workflow_activity_id": 1588,
+            "computed_status": null
+          },
+          {
+            "id": 561,
+            "result_type": "fastq",
+            "status": null,
+            "result": {
+              "fastq": {
+                "records": [{
+                  "resource_id": 3228
+                }],
+                "status": "unknown"
+              }
+            },
+            "routing": null,
+            "workflow_sample_id": 542,
+            "workflow_activity_id": 1593,
+            "computed_status": null
+          },
+          {
+            "id": 562,
+            "result_type": "sequencing",
+            "status": "accepted",
+            "result": {
+              "fastQC": {
+                "records": [{
+                  "reads": "17847539",
+                  "mean_quality": "34.57",
+                  "dup_pct": "44.64",
+                  "adapterpf": "pass",
+                  "ilmn_uni": "0",
+                  "ilmn_sm": "0",
+                  "nextera": "2.68"
+                }],
+                "status": "accepted"
+              }
+            },
+            "routing": null,
+            "workflow_sample_id": 542,
+            "workflow_activity_id": 1594,
+            "computed_status": null
+          }
+        ]
+      }]
+    },
+    "resources": []
+  }
+}
