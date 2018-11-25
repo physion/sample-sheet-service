@@ -1,0 +1,1095 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "workflow_activity"
+  ],
+  "properties": {
+    "workflow_activity": {
+      "$id": "#/properties/workflow_activity",
+      "type": "object",
+      "title": "The Workflow_activity Schema",
+      "required": [
+        "activity_name",
+        "activity_type",
+        "configuration",
+        "custom_attributes",
+        "id",
+        "resources",
+        "status",
+        "workflow"
+      ],
+      "properties": {
+        "activity_name": {
+          "$id": "#/properties/workflow_activity/properties/activity_name",
+          "type": "string",
+          "title": "The Activity_name Schema",
+          "default": "",
+          "examples": [
+            "Flowcell Setup"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "activity_type": {
+          "$id": "#/properties/workflow_activity/properties/activity_type",
+          "type": "string",
+          "title": "The Activity_type Schema",
+          "default": "",
+          "examples": [
+            "pool-samples"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "configuration": {
+          "$id": "#/properties/workflow_activity/properties/configuration",
+          "type": "object",
+          "title": "The Configuration Schema",
+          "required": [
+            "destinationContainers",
+            "postActivityFunctions",
+            "resources",
+            "sourceSampleStateLabel"
+          ],
+          "properties": {
+            "destinationContainers": {
+              "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers",
+              "type": "array",
+              "title": "The Destinationcontainers Schema",
+              "items": {
+                "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items",
+                "type": "object",
+                "title": "The Items Schema",
+                "required": [
+                  "containerTypes",
+                  "destinationMetadata",
+                  "label",
+                  "sampleLabel",
+                  "sourceMetadata"
+                ],
+                "properties": {
+                  "containerTypes": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/containerTypes",
+                    "type": "array",
+                    "title": "The Containertypes Schema",
+                    "items": {
+                      "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/containerTypes/items",
+                      "type": "string",
+                      "title": "The Items Schema",
+                      "default": "",
+                      "examples": [
+                        "1 Lane Flow Cell",
+                        "2 Lane Flow Cell"
+                      ],
+                      "pattern": "^(.*)$"
+                    }
+                  },
+                  "destinationMetadata": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/destinationMetadata",
+                    "type": "array",
+                    "title": "The Destinationmetadata Schema",
+                    "items": {
+                      "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/destinationMetadata/items",
+                      "type": "object",
+                      "title": "The Items Schema",
+                      "required": [
+                        "key",
+                        "name",
+                        "renderType"
+                      ],
+                      "properties": {
+                        "key": {
+                          "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/destinationMetadata/items/properties/key",
+                          "type": "string",
+                          "title": "The Key Schema",
+                          "default": "",
+                          "examples": [
+                            "concentration"
+                          ],
+                          "pattern": "^(.*)$"
+                        },
+                        "name": {
+                          "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/destinationMetadata/items/properties/name",
+                          "type": "string",
+                          "title": "The Name Schema",
+                          "default": "",
+                          "examples": [
+                            "Concentration (ng/µl)"
+                          ],
+                          "pattern": "^(.*)$"
+                        },
+                        "renderType": {
+                          "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/destinationMetadata/items/properties/renderType",
+                          "type": "string",
+                          "title": "The Rendertype Schema",
+                          "default": "",
+                          "examples": [
+                            "text"
+                          ],
+                          "pattern": "^(.*)$"
+                        }
+                      }
+                    }
+                  },
+                  "label": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/label",
+                    "type": "string",
+                    "title": "The Label Schema",
+                    "default": "",
+                    "examples": [
+                      "Flowcell"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "sampleLabel": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/sampleLabel",
+                    "type": "string",
+                    "title": "The Samplelabel Schema",
+                    "default": "",
+                    "examples": [
+                      "pooled-barcoded-dna"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "sourceMetadata": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/sourceMetadata",
+                    "type": "array",
+                    "title": "The Sourcemetadata Schema",
+                    "items": {
+                      "$id": "#/properties/workflow_activity/properties/configuration/properties/destinationContainers/items/properties/sourceMetadata/items",
+                      "type": "string",
+                      "title": "The Items Schema",
+                      "default": "",
+                      "examples": [
+                        "concentration"
+                      ],
+                      "pattern": "^(.*)$"
+                    }
+                  }
+                }
+              }
+            },
+            "postActivityFunctions": {
+              "$id": "#/properties/workflow_activity/properties/configuration/properties/postActivityFunctions",
+              "type": "array",
+              "title": "The Postactivityfunctions Schema",
+              "items": {
+                "$id": "#/properties/workflow_activity/properties/configuration/properties/postActivityFunctions/items",
+                "type": "object",
+                "title": "The Items Schema",
+                "required": [
+                  "name",
+                  "requiredToComplete",
+                  "type"
+                ],
+                "properties": {
+                  "name": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/postActivityFunctions/items/properties/name",
+                    "type": "string",
+                    "title": "The Name Schema",
+                    "default": "",
+                    "examples": [
+                      "ncgl_generateSampleSheetV1"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "requiredToComplete": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/postActivityFunctions/items/properties/requiredToComplete",
+                    "type": "boolean",
+                    "title": "The Requiredtocomplete Schema",
+                    "default": false,
+                    "examples": [
+                      true
+                    ]
+                  },
+                  "type": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/postActivityFunctions/items/properties/type",
+                    "type": "string",
+                    "title": "The Type Schema",
+                    "default": "",
+                    "examples": [
+                      "lambda"
+                    ],
+                    "pattern": "^(.*)$"
+                  }
+                }
+              }
+            },
+            "resources": {
+              "$id": "#/properties/workflow_activity/properties/configuration/properties/resources",
+              "type": "array",
+              "title": "The Resources Schema",
+              "items": {
+                "$id": "#/properties/workflow_activity/properties/configuration/properties/resources/items",
+                "type": "object",
+                "title": "The Items Schema",
+                "required": [
+                  "label",
+                  "name"
+                ],
+                "properties": {
+                  "label": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/resources/items/properties/label",
+                    "type": "string",
+                    "title": "The Label Schema",
+                    "default": "",
+                    "examples": [
+                      "sample-sheet"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "name": {
+                    "$id": "#/properties/workflow_activity/properties/configuration/properties/resources/items/properties/name",
+                    "type": "string",
+                    "title": "The Name Schema",
+                    "default": "",
+                    "examples": [
+                      "Sample Sheet"
+                    ],
+                    "pattern": "^(.*)$"
+                  }
+                }
+              }
+            },
+            "sourceSampleStateLabel": {
+              "$id": "#/properties/workflow_activity/properties/configuration/properties/sourceSampleStateLabel",
+              "type": "array",
+              "title": "The Sourcesamplestatelabel Schema",
+              "items": {
+                "$id": "#/properties/workflow_activity/properties/configuration/properties/sourceSampleStateLabel/items",
+                "type": "string",
+                "title": "The Items Schema",
+                "default": "",
+                "examples": [
+                  "pooled-barcoded-dna",
+                  "pooled-captured-barcoded-dna"
+                ],
+                "pattern": "^(.*)$"
+              }
+            }
+          }
+        },
+        "custom_attributes": {
+          "$id": "#/properties/workflow_activity/properties/custom_attributes",
+          "type": "object",
+          "title": "The Custom_attributes Schema",
+          "required": [
+            "flowCellId",
+            "index1",
+            "index2",
+            "read1",
+            "read2",
+            "singleRead"
+          ],
+          "properties": {
+            "flowCellId": {
+              "$id": "#/properties/workflow_activity/properties/custom_attributes/properties/flowCellId",
+              "type": "string",
+              "title": "The Flowcellid Schema",
+              "default": "",
+              "examples": [
+                ""
+              ],
+              "pattern": "^(.*)$"
+            },
+            "index1": {
+              "$id": "#/properties/workflow_activity/properties/custom_attributes/properties/index1",
+              "type": "string",
+              "title": "The Index1 Schema",
+              "default": "",
+              "examples": [
+                ""
+              ],
+              "pattern": "^(.*)$"
+            },
+            "index2": {
+              "$id": "#/properties/workflow_activity/properties/custom_attributes/properties/index2",
+              "type": "string",
+              "title": "The Index2 Schema",
+              "default": "",
+              "examples": [
+                ""
+              ],
+              "pattern": "^(.*)$"
+            },
+            "read1": {
+              "$id": "#/properties/workflow_activity/properties/custom_attributes/properties/read1",
+              "type": "string",
+              "title": "The Read1 Schema",
+              "default": "",
+              "examples": [
+                ""
+              ],
+              "pattern": "^(.*)$"
+            },
+            "read2": {
+              "$id": "#/properties/workflow_activity/properties/custom_attributes/properties/read2",
+              "type": "string",
+              "title": "The Read2 Schema",
+              "default": "",
+              "examples": [
+                ""
+              ],
+              "pattern": "^(.*)$"
+            },
+            "singleRead": {
+              "$id": "#/properties/workflow_activity/properties/custom_attributes/properties/singleRead",
+              "type": "boolean",
+              "title": "The Singleread Schema",
+              "default": false,
+              "examples": [
+                true
+              ]
+            }
+          }
+        },
+        "id": {
+          "$id": "#/properties/workflow_activity/properties/id",
+          "type": "integer",
+          "title": "The Id Schema",
+          "default": 0,
+          "examples": [
+            5565
+          ]
+        },
+        "resources": {
+          "$id": "#/properties/workflow_activity/properties/resources",
+          "type": "array",
+          "title": "The Resources Schema"
+        },
+        "status": {
+          "$id": "#/properties/workflow_activity/properties/status",
+          "type": "string",
+          "title": "The Status Schema",
+          "default": "",
+          "examples": [
+            "processing"
+          ],
+          "pattern": "^(.*)$"
+        },
+        "workflow": {
+          "$id": "#/properties/workflow_activity/properties/workflow",
+          "type": "object",
+          "title": "The Workflow Schema",
+          "required": [
+            "id",
+            "samples",
+            "status",
+            "workflow_sample_results"
+          ],
+          "properties": {
+            "id": {
+              "$id": "#/properties/workflow_activity/properties/workflow/properties/id",
+              "type": "integer",
+              "title": "The Id Schema",
+              "default": 0,
+              "examples": [
+                680
+              ]
+            },
+            "samples": {
+              "$id": "#/properties/workflow_activity/properties/workflow/properties/samples",
+              "type": "array",
+              "title": "The Samples Schema",
+              "items": {
+                "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items",
+                "type": "object",
+                "title": "The Items Schema",
+                "required": [
+                  "control",
+                  "custom_attributes",
+                  "date_received",
+                  "id",
+                  "identifier",
+                  "patient",
+                  "physician",
+                  "received",
+                  "requisition",
+                  "requisition_id",
+                  "sample_states",
+                  "sample_uuid",
+                  "workflow_sample_results"
+                ],
+                "properties": {
+                  "control": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/control",
+                    "type": "boolean",
+                    "title": "The Control Schema",
+                    "default": false,
+                    "examples": [
+                      false
+                    ]
+                  },
+                  "custom_attributes": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/custom_attributes",
+                    "type": "object",
+                    "title": "The Custom_attributes Schema"
+                  },
+                  "date_received": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/date_received",
+                    "type": "string",
+                    "title": "The Date_received Schema",
+                    "default": "",
+                    "examples": [
+                      "2018-08-16"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "id": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/id",
+                    "type": "integer",
+                    "title": "The Id Schema",
+                    "default": 0,
+                    "examples": [
+                      1939
+                    ]
+                  },
+                  "identifier": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/identifier",
+                    "type": "string",
+                    "title": "The Identifier Schema",
+                    "default": "",
+                    "examples": [
+                      "ngs-standard-uwc1.1"
+                    ],
+                    "pattern": "^(.*)$"
+                  },
+                  "patient": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient",
+                    "type": "object",
+                    "title": "The Patient Schema",
+                    "required": [
+                      "date_of_birth",
+                      "ethnicity",
+                      "first_name",
+                      "gender",
+                      "id",
+                      "identifier",
+                      "last_name",
+                      "patient_uuid",
+                      "requisition_id"
+                    ],
+                    "properties": {
+                      "date_of_birth": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/date_of_birth",
+                        "type": "null",
+                        "title": "The Date_of_birth Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "ethnicity": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/ethnicity",
+                        "type": "null",
+                        "title": "The Ethnicity Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "first_name": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/first_name",
+                        "type": "null",
+                        "title": "The First_name Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "gender": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/gender",
+                        "type": "null",
+                        "title": "The Gender Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "id": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/id",
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "default": 0,
+                        "examples": [
+                          1166
+                        ]
+                      },
+                      "identifier": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/identifier",
+                        "type": "string",
+                        "title": "The Identifier Schema",
+                        "default": "",
+                        "examples": [
+                          "ngs-standard-uwc1"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "last_name": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/last_name",
+                        "type": "null",
+                        "title": "The Last_name Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "patient_uuid": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/patient_uuid",
+                        "type": "null",
+                        "title": "The Patient_uuid Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "requisition_id": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/patient/properties/requisition_id",
+                        "type": "integer",
+                        "title": "The Requisition_id Schema",
+                        "default": 0,
+                        "examples": [
+                          1376
+                        ]
+                      }
+                    }
+                  },
+                  "physician": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/physician",
+                    "type": "null",
+                    "title": "The Physician Schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  },
+                  "received": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/received",
+                    "type": "boolean",
+                    "title": "The Received Schema",
+                    "default": false,
+                    "examples": [
+                      true
+                    ]
+                  },
+                  "requisition": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition",
+                    "type": "object",
+                    "title": "The Requisition Schema",
+                    "required": [
+                      "accession_status",
+                      "billing_status",
+                      "custom_attributes",
+                      "diagnosis",
+                      "id",
+                      "identifier",
+                      "medications",
+                      "processing_status",
+                      "project_name",
+                      "requested_tests",
+                      "sample_collection_date",
+                      "sample_type",
+                      "uuid"
+                    ],
+                    "properties": {
+                      "accession_status": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/accession_status",
+                        "type": "string",
+                        "title": "The Accession_status Schema",
+                        "default": "",
+                        "examples": [
+                          "signed"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "billing_status": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/billing_status",
+                        "type": "string",
+                        "title": "The Billing_status Schema",
+                        "default": "",
+                        "examples": [
+                          "not-submitted"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "custom_attributes": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/custom_attributes",
+                        "type": "object",
+                        "title": "The Custom_attributes Schema"
+                      },
+                      "diagnosis": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/diagnosis",
+                        "type": "null",
+                        "title": "The Diagnosis Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "id": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/id",
+                        "type": "integer",
+                        "title": "The Id Schema",
+                        "default": 0,
+                        "examples": [
+                          1376
+                        ]
+                      },
+                      "identifier": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/identifier",
+                        "type": "string",
+                        "title": "The Identifier Schema",
+                        "default": "",
+                        "examples": [
+                          "ngs-standard-uwc1"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "medications": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/medications",
+                        "type": "null",
+                        "title": "The Medications Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "processing_status": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/processing_status",
+                        "type": "string",
+                        "title": "The Processing_status Schema",
+                        "default": "",
+                        "examples": [
+                          "processing"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "project_name": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/project_name",
+                        "type": "string",
+                        "title": "The Project_name Schema",
+                        "default": "",
+                        "examples": [
+                          "Research NGS"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "requested_tests": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/requested_tests",
+                        "type": "object",
+                        "title": "The Requested_tests Schema",
+                        "required": [
+                          "pgeneric-comp"
+                        ],
+                        "properties": {
+                          "pgeneric-comp": {
+                            "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/requested_tests/properties/pgeneric-comp",
+                            "type": "boolean",
+                            "title": "The Pgeneric-comp Schema",
+                            "default": false,
+                            "examples": [
+                              true
+                            ]
+                          }
+                        }
+                      },
+                      "sample_collection_date": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/sample_collection_date",
+                        "type": "string",
+                        "title": "The Sample_collection_date Schema",
+                        "default": "",
+                        "examples": [
+                          "2018-08-12"
+                        ],
+                        "pattern": "^(.*)$"
+                      },
+                      "sample_type": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/sample_type",
+                        "type": "null",
+                        "title": "The Sample_type Schema",
+                        "default": null,
+                        "examples": [
+                          null
+                        ]
+                      },
+                      "uuid": {
+                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition/properties/uuid",
+                        "type": "string",
+                        "title": "The Uuid Schema",
+                        "default": "",
+                        "examples": [
+                          "927dfd7f-24a5-4fc6-a33b-163c5108c7e6"
+                        ],
+                        "pattern": "^(.*)$"
+                      }
+                    }
+                  },
+                  "requisition_id": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/requisition_id",
+                    "type": "integer",
+                    "title": "The Requisition_id Schema",
+                    "default": 0,
+                    "examples": [
+                      1376
+                    ]
+                  },
+                  "sample_states": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states",
+                    "type": "array",
+                    "title": "The Sample_states Schema",
+                    "items": {
+                      "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items",
+                      "type": "object",
+                      "title": "The Items Schema",
+                      "required": [
+                        "container_barcode_label",
+                        "id",
+                        "internal_position",
+                        "metadata",
+                        "pool_index",
+                        "position",
+                        "sample_id",
+                        "source_sample_state_id",
+                        "workflow_activity_id"
+                      ],
+                      "properties": {
+                        "container_barcode_label": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/container_barcode_label",
+                          "type": "string",
+                          "title": "The Container_barcode_label Schema",
+                          "default": "",
+                          "examples": [
+                            "suwc1"
+                          ],
+                          "pattern": "^(.*)$"
+                        },
+                        "id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/id",
+                          "type": "integer",
+                          "title": "The Id Schema",
+                          "default": 0,
+                          "examples": [
+                            56450
+                          ]
+                        },
+                        "internal_position": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/internal_position",
+                          "type": "integer",
+                          "title": "The Internal_position Schema",
+                          "default": 0,
+                          "examples": [
+                            1
+                          ]
+                        },
+                        "metadata": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/metadata",
+                          "type": "null",
+                          "title": "The Metadata Schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "pool_index": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/pool_index",
+                          "type": "string",
+                          "title": "The Pool_index Schema",
+                          "default": "",
+                          "examples": [
+                            "0"
+                          ],
+                          "pattern": "^(.*)$"
+                        },
+                        "position": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/position",
+                          "type": "string",
+                          "title": "The Position Schema",
+                          "default": "",
+                          "examples": [
+                            "a01"
+                          ],
+                          "pattern": "^(.*)$"
+                        },
+                        "sample_id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/sample_id",
+                          "type": "integer",
+                          "title": "The Sample_id Schema",
+                          "default": 0,
+                          "examples": [
+                            1939
+                          ]
+                        },
+                        "source_sample_state_id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/source_sample_state_id",
+                          "type": "null",
+                          "title": "The Source_sample_state_id Schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "workflow_activity_id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_states/items/properties/workflow_activity_id",
+                          "type": "null",
+                          "title": "The Workflow_activity_id Schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        }
+                      }
+                    }
+                  },
+                  "sample_uuid": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/sample_uuid",
+                    "type": "null",
+                    "title": "The Sample_uuid Schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  },
+                  "workflow_sample_results": {
+                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results",
+                    "type": "array",
+                    "title": "The Workflow_sample_results Schema",
+                    "items": {
+                      "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items",
+                      "type": "object",
+                      "title": "The Items Schema",
+                      "required": [
+                        "computed_status",
+                        "id",
+                        "result",
+                        "result_type",
+                        "routing",
+                        "sample_id",
+                        "status",
+                        "workflow_activity_id",
+                        "workflow_sample_id"
+                      ],
+                      "properties": {
+                        "computed_status": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/computed_status",
+                          "type": "null",
+                          "title": "The Computed_status Schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/id",
+                          "type": "integer",
+                          "title": "The Id Schema",
+                          "default": 0,
+                          "examples": [
+                            2050
+                          ]
+                        },
+                        "result": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result",
+                          "type": "object",
+                          "title": "The Result Schema",
+                          "required": [
+                            "adapter_barcode"
+                          ],
+                          "properties": {
+                            "adapter_barcode": {
+                              "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode",
+                              "type": "object",
+                              "title": "The Adapter_barcode Schema",
+                              "required": [
+                                "records"
+                              ],
+                              "properties": {
+                                "records": {
+                                  "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records",
+                                  "type": "array",
+                                  "title": "The Records Schema",
+                                  "items": {
+                                    "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items",
+                                    "type": "object",
+                                    "title": "The Items Schema",
+                                    "required": [
+                                      "Adapter Set",
+                                      "I5 Sequence",
+                                      "I7 Sequence",
+                                      "Index 1 (I7)",
+                                      "Index 2 (I5)",
+                                      "Name",
+                                      "Project",
+                                      "barcode"
+                                    ],
+                                    "properties": {
+                                      "Adapter Set": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/Adapter Set",
+                                        "type": "string",
+                                        "title": "The Adapter set Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "Alpha"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "I5 Sequence": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/I5 Sequence",
+                                        "type": "string",
+                                        "title": "The I5 sequence Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "TATAGCCT"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "I7 Sequence": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/I7 Sequence",
+                                        "type": "string",
+                                        "title": "The I7 sequence Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "GAGATTCC"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "Index 1 (I7)": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/Index 1 (I7)",
+                                        "type": "string",
+                                        "title": "The Index 1 (i7) Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "D704"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "Index 2 (I5)": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/Index 2 (I5)",
+                                        "type": "string",
+                                        "title": "The Index 2 (i5) Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "D501"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "Name": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/Name",
+                                        "type": "string",
+                                        "title": "The Name Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "ADP313-1"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "Project": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/Project",
+                                        "type": "string",
+                                        "title": "The Project Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "General"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      },
+                                      "barcode": {
+                                        "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result/properties/adapter_barcode/properties/records/items/properties/barcode",
+                                        "type": "string",
+                                        "title": "The Barcode Schema",
+                                        "default": "",
+                                        "examples": [
+                                          "ADP313-1"
+                                        ],
+                                        "pattern": "^(.*)$"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "result_type": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/result_type",
+                          "type": "string",
+                          "title": "The Result_type Schema",
+                          "default": "",
+                          "examples": [
+                            "adapter_barcode"
+                          ],
+                          "pattern": "^(.*)$"
+                        },
+                        "routing": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/routing",
+                          "type": "null",
+                          "title": "The Routing Schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "sample_id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/sample_id",
+                          "type": "integer",
+                          "title": "The Sample_id Schema",
+                          "default": 0,
+                          "examples": [
+                            1939
+                          ]
+                        },
+                        "status": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/status",
+                          "type": "null",
+                          "title": "The Status Schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "workflow_activity_id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/workflow_activity_id",
+                          "type": "integer",
+                          "title": "The Workflow_activity_id Schema",
+                          "default": 0,
+                          "examples": [
+                            4771
+                          ]
+                        },
+                        "workflow_sample_id": {
+                          "$id": "#/properties/workflow_activity/properties/workflow/properties/samples/items/properties/workflow_sample_results/items/properties/workflow_sample_id",
+                          "type": "integer",
+                          "title": "The Workflow_sample_id Schema",
+                          "default": 0,
+                          "examples": [
+                            1797
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "status": {
+              "$id": "#/properties/workflow_activity/properties/workflow/properties/status",
+              "type": "string",
+              "title": "The Status Schema",
+              "default": "",
+              "examples": [
+                "processing"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "workflow_sample_results": {
+              "$id": "#/properties/workflow_activity/properties/workflow/properties/workflow_sample_results",
+              "type": "array",
+              "title": "The Workflow_sample_results Schema"
+            }
+          }
+        }
+      }
+    }
+  }
+}

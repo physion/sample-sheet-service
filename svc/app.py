@@ -1,65 +1,13 @@
 import falcon
+import json
 import svc.illumina as illumina
 
+from importlib import resources
 from falcon.media.validators import jsonschema
 
 
-SAMPLE_SHEET_REQ_SCHEMA = {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://ovation.io/sample.sheet.generation.request.schema.json",
-    "type": "object",
-    "properties": {
-        "workflow_activity": {
-            "type": "object",
-            "properties": {
-                "id": {"type": "number"},
-                "custom_attributes": {
-                    "type": "object"
-                },
-                "workflow": {
-                    "type": "object",
-                    "properties": {
-                        "id": {"type": "number"},
-                        "samples": {
-                            "type": "array",
-                            "items": {
-                                "type": "object",
-                                "properties": {
-                                    "id": {"type": "number"},
-                                    "identifier": {"type": "string"},
-                                    "control": {"type": "boolean"},
-                                    "date_received": {"type": "string"},
-                                    "custom_attributes": {"type": "object"},
-                                    "sample_states": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {"type": "number"},
-                                                "position": {"type": "string"},
-                                                "pool_index": {"type": "string"}
-                                            }
-                                        }
-                                    },
-                                    "requisition": {"type": "object"},
-                                    "patient": {"type": "object"},
-                                    "physician": {"type": "object"},
-                                    "workflow_sample_results": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "required": ["workflow_activity"]
-}
+with resources.open_text("svc", "post.schema.json") as fid:
+    SAMPLE_SHEET_REQ_SCHEMA = json.load(fid)
 
 
 class IlluminaSampleSheet(object):
@@ -67,8 +15,9 @@ class IlluminaSampleSheet(object):
     def on_post(self, req, resp, **claims):
         body = req.media
 
-        resp.media = illumina.generate_sample_sheet(body)
+        resp.body = illumina.make_sample_sheet_json(body)
 
+        resp.content_type = falcon.MEDIA_JSON
         resp.status = falcon.HTTP_CREATED
 
 
