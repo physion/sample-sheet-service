@@ -24,4 +24,32 @@ def test_reads_secret_from_environ():
     key = 'TEST_KEY'
     os.environ[key] = 'FINDME'
 
-    assert config.secret(key) == 'FINDME'
+    try:
+        assert config.secret(key) == 'FINDME'
+    finally:
+        del os.environ[key]
+
+
+def test_reads_configuration_fron_environ():
+    key = 'TEST_KEY'
+    value = 'TEST_VALUE'
+    os.environ[key] = value
+
+    try:
+        assert config.configuration(key) == value
+    finally:
+        del os.environ[key]
+
+
+def test_allows_default_configuration():
+    key = 'MISSING_KEY'
+    expected = 'DEFAULT_VALUE'
+
+    assert config.configuration(key, default=expected) == expected
+
+
+def test_allows_default_secret():
+    key = 'MISSING_KEY'
+    expected = 'DEFAULT_VALUE'
+
+    assert config.secret(key, default=expected) == expected
