@@ -1,6 +1,4 @@
-import io
 import json
-import pprint
 
 import svc.illumina as illumina
 
