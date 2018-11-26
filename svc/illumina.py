@@ -1,3 +1,5 @@
+import io
+
 from sample_sheet import SampleSheet, Sample
 from typing import List, Any, Dict, Mapping
 
@@ -13,7 +15,7 @@ CONTAINER_POSITION = 'position'
 ID = 'id'
 
 
-def make_sample_sheet_json(body: Mapping[str,Any], adapter_result_type='adapter_barcode') -> str:
+def make_sample_sheet(body: Mapping[str, Any], adapter_result_type='adapter_barcode') -> str:
     wfa = body[WORKFLOW_ACTIVITY]
     activity_id = wfa[ID]
     wf = wfa[WORKFLOW]
@@ -23,8 +25,13 @@ def make_sample_sheet_json(body: Mapping[str,Any], adapter_result_type='adapter_
     for sample in samples:
         sample_sheet.add_samples(sample_records(activity_id, sample, adapter_result_type=adapter_result_type))
 
-    return sample_sheet.to_json()
+    return sample_sheet
 
+
+def to_csv(sample_sheet: SampleSheet) -> str:
+    with io.StringIO() as sio:
+        sample_sheet.write(sio)
+        return sio.getvalue()
 
 def sample_records(activity_id: int, sample: Mapping[str,Any], adapter_result_type='adapter_barcode') -> List[Sample]:
     """

@@ -1,4 +1,7 @@
+import io
 import json
+import pprint
+
 import svc.illumina as illumina
 
 from nose.tools import istest
@@ -316,9 +319,14 @@ def should_generates_sample_sheet_data():
                  ]
     }
 
+    assert json.loads(illumina.make_sample_sheet(FIXTURE).to_json()) == expected
 
-    assert expected == json.loads(illumina.make_sample_sheet_json(FIXTURE))
 
+@istest
+def should_generate_sample_sheet_csv():
+    expected = '[Header],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Reads],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Settings],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Data],,,,,,,,,,,\r\nSample_ID,Sample_Name,Lane,FCID,Adapter Set,I5 Sequence,I7 Sequence,Index 1 (I7),Index 2 (I5),Name,Project,barcode\r\nngs-standard-uwc1.1,ngs-standard-uwc1.1,1,P000000004A0,Alpha,TATAGCCT,GAGATTCC,D704,D501,ADP313-1,General,ADP313-1\r\nngs-standard-uwc2.1,ngs-standard-uwc2.1,1,P000000004A0,Alpha,ATAGAGGC,ATTCAGAA,D705,D502,ADP314-1,General,ADP314-1\r\n'
+
+    assert illumina.to_csv(illumina.make_sample_sheet(FIXTURE)) == expected
 
 @istest
 def should_convert_position_to_lane_1():
