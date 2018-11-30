@@ -15,7 +15,7 @@ CONTAINER_POSITION = 'position'
 ID = 'id'
 
 
-def make_sample_sheet(body: Mapping[str, Any], adapter_result_type='adapter_barcode') -> SampleSheet:
+def make_sample_sheet(body: Mapping[str, Any], adapter_result_type='library-adapter-barcode') -> SampleSheet:
     wfa = body[WORKFLOW_ACTIVITY]
     activity_id = wfa[ID]
     wf = wfa[WORKFLOW]
@@ -34,7 +34,7 @@ def to_csv(sample_sheet: SampleSheet) -> str:
         return sio.getvalue()
 
 
-def sample_records(activity_id: int, sample: Mapping[str, Any], adapter_result_type='adapter_barcode') -> List[Sample]:
+def sample_records(activity_id: int, sample: Mapping[str, Any], adapter_result_type='library-adapter-barcode') -> List[Sample]:
     """
     Constructs a `sample_sheet.Sample` for each library adapter record for the sample.
 
