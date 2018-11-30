@@ -15,7 +15,7 @@ CONTAINER_POSITION = 'position'
 ID = 'id'
 
 
-def make_sample_sheet(body: Mapping[str, Any], adapter_result_type='library-adapter-barcode') -> SampleSheet:
+def make_sample_sheet(body: Mapping[str, Any], adapter_result_type=None) -> SampleSheet:
     wfa = body[WORKFLOW_ACTIVITY]
     activity_id = wfa[ID]
     wf = wfa[WORKFLOW]
@@ -34,7 +34,7 @@ def to_csv(sample_sheet: SampleSheet) -> str:
         return sio.getvalue()
 
 
-def sample_records(activity_id: int, sample: Mapping[str, Any], adapter_result_type='library-adapter-barcode') -> List[Sample]:
+def sample_records(activity_id: int, sample: Mapping[str, Any], adapter_result_type=None) -> List[Sample]:
     """
     Constructs a `sample_sheet.Sample` for each library adapter record for the sample.
 
@@ -74,7 +74,7 @@ def position_to_lane(container_position: str) -> int:
     return int(container_position[1:])
 
 
-def sample_adapter_results(activity_id: int, sample: Mapping[str, Any], adapter_result_type='adapter_barcode') -> Dict[
+def sample_adapter_results(activity_id: int, sample: Mapping[str, Any], adapter_result_type=None) -> Dict[
     str, List[Dict[str, Any]]]:
     """
     Collects adapter WSR records for a sample. Traces backwards from flow cell activity to find the
