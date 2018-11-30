@@ -106,3 +106,5 @@ venv.bak/
 # IDEA
 .idea/
 codeship.aes
+lambda_pkg.zip
+deploy/local.sh

@@ -286,7 +286,7 @@ def should_return_sample_sheet_csv():
 
     expected = {
         'statusCode': 200,
-        'body': json.dumps(response)
+        'body': response
     }
 
     assert lambda_function.lambda_handler(FIXTURE, {}) == expected
