@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  library:
+    build:
+      image: ovation-sample-sheet-service
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+
