@@ -108,3 +108,7 @@ venv.bak/
 codeship.aes
 lambda_pkg.zip
 deploy/local.sh
+
+# Deployment
+pkg/
+deploy/pkg

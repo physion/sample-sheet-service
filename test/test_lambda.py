@@ -274,19 +274,13 @@ FIXTURE = {'workflow_activity': {'activity_name': 'Flowcell Setup',
 @istest
 def should_return_sample_sheet_csv():
     sample_sheet = '[Header],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Reads],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Settings],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Data],,,,,,,,,,,\r\nSample_ID,Sample_Name,Lane,FCID,Adapter Set,I5 Sequence,I7 Sequence,Index 1 (I7),Index 2 (I5),Name,Project,barcode\r\nngs-standard-uwc1.1,ngs-standard-uwc1.1,1,P000000004A0,Alpha,TATAGCCT,GAGATTCC,D704,D501,ADP313-1,General,ADP313-1\r\nngs-standard-uwc2.1,ngs-standard-uwc2.1,1,P000000004A0,Alpha,ATAGAGGC,ATTCAGAA,D705,D502,ADP314-1,General,ADP314-1\r\n'
-    encoded_sample_sheet_bytes = base64.encodebytes(sample_sheet.encode(constants.UTF8))
 
     response = {
         "resources": [{
             "resource_name": "sample_sheet.csv",
-            "content": encoded_sample_sheet_bytes.decode(constants.UTF8),
+            "content": sample_sheet,
             "label": "sample-sheet"
         }]
     }
 
-    expected = {
-        'statusCode': 200,
-        'body': response
-    }
-
-    assert lambda_function.lambda_handler(FIXTURE, {}) == expected
+    assert lambda_function.lambda_handler(FIXTURE, {}) == response

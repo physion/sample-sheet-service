@@ -15,17 +15,15 @@ def lambda_handler(event, _):
     sample_sheet = illumina.make_sample_sheet(event, adapter_result_type='library-adapter-barcode')
 
     sample_sheet_csv = illumina.to_csv(sample_sheet)
-    encoded_sample_sheet_bytes = base64.encodebytes(sample_sheet_csv.encode(constants.UTF8))
 
     response = {
         "resources": [{
             "resource_name": "sample_sheet.csv",
-            "content": encoded_sample_sheet_bytes.decode(constants.UTF8),
+            "content": sample_sheet_csv,
             "label": "sample-sheet"
         }]
     }
 
-    return {
-        'statusCode': 200,
-        'body': response
-    }
+    logging.debug(response)
+
+    return response

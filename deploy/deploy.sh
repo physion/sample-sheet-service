@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+LAMBDA_FUNCTION=$1
+
 mkdir pkg
 pip install -r requirements.txt --target pkg
 
