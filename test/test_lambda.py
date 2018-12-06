@@ -1,8 +1,9 @@
+import base64
 import json
 
-import svc.illumina as illumina
-
 from nose.tools import istest
+from svc import constants
+from svc import lambda_function
 
 FIXTURE = {'workflow_activity': {'activity_name': 'Flowcell Setup',
                                  'activity_type': 'pool-samples',
@@ -113,16 +114,18 @@ FIXTURE = {'workflow_activity': {'activity_name': 'Flowcell Setup',
                                                            'sample_uuid': None,
                                                            'workflow_sample_results': [{'computed_status': None,
                                                                                         'id': 2050,
-                                                                                        'result': {'library-adapter-barcode': {
-                                                                                            'records': [
-                                                                                                {'Adapter Set': 'Alpha',
-                                                                                                 'I5 Sequence': 'TATAGCCT',
-                                                                                                 'I7 Sequence': 'GAGATTCC',
-                                                                                                 'Index 1 (I7)': 'D704',
-                                                                                                 'Index 2 (I5)': 'D501',
-                                                                                                 'Name': 'ADP313-1',
-                                                                                                 'Project': 'General',
-                                                                                                 'barcode': 'ADP313-1'}]}},
+                                                                                        'result': {
+                                                                                            'library-adapter-barcode': {
+                                                                                                'records': [
+                                                                                                    {
+                                                                                                        'Adapter Set': 'Alpha',
+                                                                                                        'I5 Sequence': 'TATAGCCT',
+                                                                                                        'I7 Sequence': 'GAGATTCC',
+                                                                                                        'Index 1 (I7)': 'D704',
+                                                                                                        'Index 2 (I5)': 'D501',
+                                                                                                        'Name': 'ADP313-1',
+                                                                                                        'Project': 'General',
+                                                                                                        'barcode': 'ADP313-1'}]}},
                                                                                         'result_type': 'library-adapter-barcode',
                                                                                         'routing': None,
                                                                                         'sample_id': 1939,
@@ -227,16 +230,18 @@ FIXTURE = {'workflow_activity': {'activity_name': 'Flowcell Setup',
                                                            'sample_uuid': None,
                                                            'workflow_sample_results': [{'computed_status': None,
                                                                                         'id': 2051,
-                                                                                        'result': {'library-adapter-barcode': {
-                                                                                            'records': [
-                                                                                                {'Adapter Set': 'Alpha',
-                                                                                                 'I5 Sequence': 'ATAGAGGC',
-                                                                                                 'I7 Sequence': 'ATTCAGAA',
-                                                                                                 'Index 1 (I7)': 'D705',
-                                                                                                 'Index 2 (I5)': 'D502',
-                                                                                                 'Name': 'ADP314-1',
-                                                                                                 'Project': 'General',
-                                                                                                 'barcode': 'ADP314-1'}]}},
+                                                                                        'result': {
+                                                                                            'library-adapter-barcode': {
+                                                                                                'records': [
+                                                                                                    {
+                                                                                                        'Adapter Set': 'Alpha',
+                                                                                                        'I5 Sequence': 'ATAGAGGC',
+                                                                                                        'I7 Sequence': 'ATTCAGAA',
+                                                                                                        'Index 1 (I7)': 'D705',
+                                                                                                        'Index 2 (I5)': 'D502',
+                                                                                                        'Name': 'ADP314-1',
+                                                                                                        'Project': 'General',
+                                                                                                        'barcode': 'ADP314-1'}]}},
                                                                                         'result_type': 'library-adapter-barcode',
                                                                                         'routing': None,
                                                                                         'sample_id': 1940,
@@ -266,80 +271,16 @@ FIXTURE = {'workflow_activity': {'activity_name': 'Flowcell Setup',
                                               'workflow_sample_results': []}}}
 
 
-RESULT_TYPE = 'library-adapter-barcode'
 @istest
-def should_find_sample_adapter_results():
-    sample = FIXTURE['workflow_activity']['workflow']['samples'][0]
-    activity_id = FIXTURE['workflow_activity']['id']
+def should_return_sample_sheet_csv():
+    sample_sheet = '[Header],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Reads],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Settings],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Data],,,,,,,,,,,\r\nSample_ID,Sample_Name,Lane,FCID,Adapter Set,I5 Sequence,I7 Sequence,Index 1 (I7),Index 2 (I5),Name,Project,barcode\r\nngs-standard-uwc1.1,ngs-standard-uwc1.1,1,P000000004A0,Alpha,TATAGCCT,GAGATTCC,D704,D501,ADP313-1,General,ADP313-1\r\nngs-standard-uwc2.1,ngs-standard-uwc2.1,1,P000000004A0,Alpha,ATAGAGGC,ATTCAGAA,D705,D502,ADP314-1,General,ADP314-1\r\n'
 
-    actual = illumina.sample_adapter_results(activity_id,
-                                             sample,
-                                             adapter_result_type=RESULT_TYPE)
-    
-    expected = {67291: [{'Adapter Set': 'Alpha',
-                         'I5 Sequence': 'TATAGCCT',
-                         'I7 Sequence': 'GAGATTCC',
-                         'Index 1 (I7)': 'D704',
-                         'Index 2 (I5)': 'D501',
-                         'Name': 'ADP313-1',
-                         'Project': 'General',
-                         'barcode': 'ADP313-1'}]}
-
-    assert actual == expected
-
-
-@istest
-def should_generates_sample_sheet_data():
-    expected = {
-        "Header": {},
-        "Reads": [],
-        "Settings": {},
-        "Data": [{'Sample_ID': 'ngs-standard-uwc1.1',
-                  'Sample_Name': 'ngs-standard-uwc1.1',
-                  'Lane': '1',
-                  'FCID': 'P000000004A0',
-                  'Adapter Set': 'Alpha',
-                  'I5 Sequence': 'TATAGCCT',
-                  'I7 Sequence': 'GAGATTCC',
-                  'Index 1 (I7)': 'D704',
-                  'Index 2 (I5)': 'D501',
-                  'Name': 'ADP313-1',
-                  'Project': 'General',
-                  'barcode': 'ADP313-1'},
-                 {'Sample_ID': 'ngs-standard-uwc2.1',
-                  'Sample_Name': 'ngs-standard-uwc2.1',
-                  'Lane': '1',
-                  'FCID': 'P000000004A0',
-                  'Adapter Set': 'Alpha',
-                  'I5 Sequence': 'ATAGAGGC',
-                  'I7 Sequence': 'ATTCAGAA',
-                  'Index 1 (I7)': 'D705',
-                  'Index 2 (I5)': 'D502',
-                  'Name': 'ADP314-1',
-                  'Project': 'General',
-                  'barcode': 'ADP314-1'}
-                 ]
+    response = {
+        "resources": [{
+            "resource_name": "sample_sheet.csv",
+            "content": sample_sheet,
+            "label": "sample-sheet"
+        }]
     }
 
-    assert json.loads(illumina.make_sample_sheet(FIXTURE, adapter_result_type=RESULT_TYPE).to_json()) == expected
-
-
-@istest
-def should_generate_sample_sheet_csv():
-    expected = '[Header],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Reads],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Settings],,,,,,,,,,,\r\n,,,,,,,,,,,\r\n[Data],,,,,,,,,,,\r\nSample_ID,Sample_Name,Lane,FCID,Adapter Set,I5 Sequence,I7 Sequence,Index 1 (I7),Index 2 (I5),Name,Project,barcode\r\nngs-standard-uwc1.1,ngs-standard-uwc1.1,1,P000000004A0,Alpha,TATAGCCT,GAGATTCC,D704,D501,ADP313-1,General,ADP313-1\r\nngs-standard-uwc2.1,ngs-standard-uwc2.1,1,P000000004A0,Alpha,ATAGAGGC,ATTCAGAA,D705,D502,ADP314-1,General,ADP314-1\r\n'
-
-    assert illumina.to_csv(illumina.make_sample_sheet(FIXTURE, adapter_result_type=RESULT_TYPE)) == expected
-
-@istest
-def should_convert_position_to_lane_1():
-    assert illumina.position_to_lane('A01') == 1
-
-
-@istest
-def should_convert_position_to_lane_2():
-    assert illumina.position_to_lane('A02') == 2
-
-
-@istest
-def should_convert_sample_name_to_id():
-    assert illumina.to_sample_id('my sample-name 3') == 'my_sample-name_3'
+    assert lambda_function.lambda_handler(FIXTURE, {}) == response

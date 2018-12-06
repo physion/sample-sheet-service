@@ -1,3 +1,5 @@
+import io
+
 from sample_sheet import SampleSheet, Sample
 from typing import List, Any, Dict, Mapping
 
@@ -13,7 +15,7 @@ CONTAINER_POSITION = 'position'
 ID = 'id'
 
 
-def make_sample_sheet_json(body: Mapping[str,Any], adapter_result_type='adapter_barcode') -> str:
+def make_sample_sheet(body: Mapping[str, Any], adapter_result_type=None) -> SampleSheet:
     wfa = body[WORKFLOW_ACTIVITY]
     activity_id = wfa[ID]
     wf = wfa[WORKFLOW]
@@ -23,10 +25,16 @@ def make_sample_sheet_json(body: Mapping[str,Any], adapter_result_type='adapter_
     for sample in samples:
         sample_sheet.add_samples(sample_records(activity_id, sample, adapter_result_type=adapter_result_type))
 
-    return sample_sheet.to_json()
+    return sample_sheet
 
 
-def sample_records(activity_id: int, sample: Mapping[str,Any], adapter_result_type='adapter_barcode') -> List[Sample]:
+def to_csv(sample_sheet: SampleSheet) -> str:
+    with io.StringIO() as sio:
+        sample_sheet.write(sio)
+        return sio.getvalue()
+
+
+def sample_records(activity_id: int, sample: Mapping[str, Any], adapter_result_type=None) -> List[Sample]:
     """
     Constructs a `sample_sheet.Sample` for each library adapter record for the sample.
 
@@ -63,11 +71,22 @@ def to_sample_id(sample_name: str) -> str:
 
 
 def position_to_lane(container_position: str) -> int:
+    """
+    Converts a container position string (e.g. A01, A02, etc.) to a lane index.
+
+    A01 => Lane 1
+    A02 => Lane 2
+
+    **Assumes there is only one row in positions; A01 and B01 both convert to Lane 1**
+
+    :param container_position: OvDx container position string (e.g. 'A01')
+    :return: lane integer
+    """
+
     return int(container_position[1:])
 
 
-def sample_adapter_results(activity_id: int, sample: Mapping[str,Any], adapter_result_type='adapter_barcode') -> Dict[
-    str, List[Dict[str, Any]]]:
+def sample_adapter_results(activity_id: int, sample: Mapping[str, Any], adapter_result_type=None) -> Dict[str, List[Dict[str, Any]]]:
     """
     Collects adapter WSR records for a sample. Traces backwards from flow cell activity to find the
     correct library WSR.
@@ -113,9 +132,9 @@ def _find_adapter_sample_state(current_sample_state, sample_states, adapter_resu
         adapter_result_workflow_activity_ids)
 
 
-def _sample_state_with_id(id, sample_states):
+def _sample_state_with_id(sample_state_id, sample_states):
     for s in sample_states:
-        if s['id'] == id:
+        if s['id'] == sample_state_id:
             return s
 
     return None

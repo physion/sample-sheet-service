@@ -105,3 +105,13 @@ venv.bak/
 
 # IDEA
 .idea/
+codeship.aes
+
+# Deployment
+pkg/
+deploy/pkg
+lambda_pkg.zip
+deploy/local.sh
+
+# Codeship
+aws-deployment.env

@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+  library:
+    build:
+      image: ovation-sample-sheet-service
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+
+  awsdeployment:
+    image: codeship/aws-deployment
+    encrypted_env_file: aws-deployment.env.encrypted
+    environment:
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - ./:/src
+
