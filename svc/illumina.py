@@ -71,11 +71,22 @@ def to_sample_id(sample_name: str) -> str:
 
 
 def position_to_lane(container_position: str) -> int:
+    """
+    Converts a container position string (e.g. A01, A02, etc.) to a lane index.
+
+    A01 => Lane 1
+    A02 => Lane 2
+
+    **Assumes there is only one row in positions; A01 and B01 both convert to Lane 1**
+
+    :param container_position: OvDx container position string (e.g. 'A01')
+    :return: lane integer
+    """
+
     return int(container_position[1:])
 
 
-def sample_adapter_results(activity_id: int, sample: Mapping[str, Any], adapter_result_type=None) -> Dict[
-    str, List[Dict[str, Any]]]:
+def sample_adapter_results(activity_id: int, sample: Mapping[str, Any], adapter_result_type=None) -> Dict[str, List[Dict[str, Any]]]:
     """
     Collects adapter WSR records for a sample. Traces backwards from flow cell activity to find the
     correct library WSR.
@@ -121,9 +132,9 @@ def _find_adapter_sample_state(current_sample_state, sample_states, adapter_resu
         adapter_result_workflow_activity_ids)
 
 
-def _sample_state_with_id(id, sample_states):
+def _sample_state_with_id(sample_state_id, sample_states):
     for s in sample_states:
-        if s['id'] == id:
+        if s['id'] == sample_state_id:
             return s
 
     return None
